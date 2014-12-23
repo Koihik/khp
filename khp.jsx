@@ -111,16 +111,6 @@ function exportArtLayer(layer){
 	node.x -= transX;
 	node.y -= transY;
 
-	alert("export : " + layer.name);
-	alert("layer.bounds[0] = " + layer.bounds[0]);
-	alert("layer.bounds[1] = " + layer.bounds[1]);
-	alert("layer.bounds[2] = " + layer.bounds[2]);
-	alert("layer.bounds[3] = " + layer.bounds[3]);
-	alert("node.x = " + node.x);
-	alert("node.y = " + node.y);
-	alert("transX = " + transX);
-	alert("transY = " + transY);
-
 	node.parseAttr(arr);
 	parent.addChild(node);
 
@@ -205,20 +195,11 @@ function exportLayerSet(layerSet){
 	node.x -= transX;
 	node.y -= transY;
 
-	// alert("export : " + layerSet.name);
-	// alert("node.x = " + node.x);
-	// alert("node.y = " + node.y);
-	// alert("transX = " + transX);
-	// alert("transY = " + transY);
-
 	node.parseAttr(arr);
 
 	nodeStack.push(node);
 	transX += (node.x - node.width/2);
 	transY += (node.y - node.height/2);
-
-	// alert("transX += " + (node.x - node.width/2));
-	// alert("transY += " + (node.y - node.height/2));
 
 	for(var i=layerSet.artLayers.length-1;i>=0;i--) {
 		if(layerSet.artLayers[i].name != "__content"){
