@@ -219,21 +219,45 @@ function exportLayerSet(layerSet){
 
 //
 function getNodeX(node){
-	return node.bounds[0].as("px") + getNodeWidth(node)/2;
+	var left = node.bounds[0].as("px");
+	if(left < 0){
+		left = 0;		
+	}
+	return left + getNodeWidth(node)/2;
 	// return node.bounds[0].as("px");
 }
 
 function getNodeY(node){
-	return originDocument.height.as("px") - node.bounds[1].as("px")  - getNodeHeight(node)/2;
+	var top = node.bounds[1].as("px");
+	if(top < 0){
+		top = 0;		
+	}
+	return originDocument.height.as("px") - top  - getNodeHeight(node)/2;
 	// return originDocument.height.as("px") - node.bounds[1].as("px");
 }
 
 function getNodeWidth(node){
-    return node.bounds[2].as("px") - node.bounds[0].as("px")
+	var left = node.bounds[0].as("px");
+	var right = node.bounds[2].as("px");
+	if(left < 0){
+		left = 0;		
+	}
+	if(right > originDocument.width.as("px")){
+		right = originDocument.width.as("px");		
+	}
+    return right - left;
 }
 
 function getNodeHeight(node){
-    return node.bounds[3].as("px") - node.bounds[1].as("px")
+	var top = node.bounds[1].as("px");
+	var bottom = node.bounds[3].as("px");
+	if(top < 0){
+		top = 0;		
+	}
+	if(bottom > originDocument.height.as("px")){
+		bottom = originDocument.height.as("px");
+	}
+    return bottom - top;
 }
 
 function removeInvisibleLayers(doc) {
