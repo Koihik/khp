@@ -1,3 +1,7 @@
+DEFAULT_FONT_NAME = "MarkerFelt"
+
+
+
 function CCBFile(){
 	this.centeredOrigin = false;
 	this.currentResolution = 0;
@@ -206,6 +210,112 @@ CCSprite.prototype.toCCB = function(){
 		name:"flip",
 		type:"Flip",
 		value:[this.flipX,this.flipY]
+	});
+	return ccbNode;
+}
+
+function CCLabelTTF(){
+	CCNode.call(this);
+	this.baseClass = "CCLabelTTF";
+	this.displayName = "CCLabelTTF";
+
+	this.fontName = DEFAULT_FONT_NAME;
+	this.fontSize = 24.0;
+	this.dimensions = [0.0,0.0];
+	this.horizontalAlignment = 1;
+	this.verticalAlignment = 1;
+	this.text = "";
+}
+
+CCLabelTTF.prototype = new CCNode();
+
+CCLabelTTF.prototype.toCCB = function(){
+	var ccbNode = CCNode.prototype.toCCB.call(this);
+	ccbNode.properties.push({
+		name:"string",
+		type:"Text",
+		value:this.text
+	});
+	ccbNode.properties.push({
+		name:"fontName",
+		type:"FontTTF",
+		value:this.fontName
+	});
+	ccbNode.properties.push({
+		name:"fontSize",
+		type:"FloatScale",
+		value:this.fontSize
+	});
+	ccbNode.properties.push({
+		name:"dimensions",
+		type:"Size",
+		value:this.dimensions
+	});
+	ccbNode.properties.push({
+		name:"horizontalAlignment",
+		type:"IntegerLabeled",
+		value:this.horizontalAlignment
+	});
+	ccbNode.properties.push({
+		name:"verticalAlignment",
+		type:"IntegerLabeled",
+		value:this.verticalAlignment
+	});
+	return ccbNode;
+}
+
+function CCLayer(){
+	CCNode.call(this);
+	this.baseClass = "CCLayer";
+	this.displayName = "CCLayer";
+
+	this.width = 0;
+	this.height = 0;
+}
+
+CCLayer.prototype = new CCNode();
+
+CCLayer.prototype.toCCB = function(){
+	var ccbNode = CCNode.prototype.toCCB.call(this);
+	ccbNode.properties.push({
+		name:"contentSize",
+		type:"Size",
+		value:[this.width,this.height,0]
+	});
+	return ccbNode;
+}
+
+
+function CCControlButton(){
+	CCNode.call(this);
+	this.baseClass = "CCControlButton";
+	this.displayName = "CCControlButton";
+
+	this.ccControl = "__CLICK";
+	this.enabled = true;
+	this.title = "";
+	this.titleTTF = DEFAULT_FONT_NAME;
+	this.titleTTFSize = 24.0;
+	this.labelAnchorPoint = [0.5,0.5];
+	this.preferedSize = [0,0];
+	this.zoomOnTouchDown = true;
+	this.bgNormal = "";
+	this.titleColorNormal = [0,0,0];
+	this.bgHighlighted = "";
+	this.titleColorHighlighted = [0,0,0];
+	this.bgDisabled = "";
+	this.titleColorDisabled = [0,0,0];
+
+}
+
+CCControlButton.prototype = new CCNode();
+
+CCControlButton.prototype.toCCB = function(){
+	var ccbNode = CCNode.prototype.toCCB.call(this);
+	ccbNode.properties.push({
+		name:"contentSize",
+		type:"Size",
+		value:[this.width,this.height,0]
 	});
 	return ccbNode;
 }

@@ -89,6 +89,8 @@ function exportArtLayer(layer){
 			node = new CCNode();
 		case "layer":
 			node = new CCLayer();
+			node.width = getNodeWidth(layer);
+			node.height = getNodeHeight(layer);
 			break;
 		case "sprite":
 			node = new CCSprite();
@@ -98,6 +100,11 @@ function exportArtLayer(layer){
 		case "label":
 			node = new CCLabelTTF();
 			node.text = layer.textItem.contents;
+			node.fontName = layer.textItem.font;
+			node.fontSize = layer.textItem.size.as("px");
+			node.r = layer.textItem.color.rgb.red;
+			node.g = layer.textItem.color.rgb.green;
+			node.b = layer.textItem.color.rgb.blue;
 			break;
 		default:
 			throw new Error("unexpected nodeType : " + nodeType);
